@@ -1,19 +1,19 @@
 #!/bin/bash
-#SBATCH--time=1-00:00:00
+#SBATCH--time=1:00
 
 while [ "$1" != "" ]; do
 	case $1 in
-		one)		shift
-					one=$1
+		--directoryName) shift
+					directoryName=$1
 					;;
-		two)		shift
-					two=$1
+		--otherDirectoryName) shift
+					otherDirectoryName=$1
 					;;
-		three)		shift
-					three=$1
+		--foundDirectories) shift
+					foundDirectories=$1
 					;;
 	esac
 	shift
 done
 
-python test.py $one -t $two > $three
+ls $directoryName $otherDirectoryName >> $foundDirectories

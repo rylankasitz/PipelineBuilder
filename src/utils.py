@@ -10,7 +10,7 @@ def write_shell_args(file_, cmd_args):
     f = open(file_, "a")
     f.write('while [ "$1" != "" ]; do\n\tcase $1 in\n')
     for arg in cmd_args:
-        f.write("\t\t" + arg + ")\t\tshift\n\t\t\t\t\t" + arg  + "=$1\n\t\t\t\t\t;;\n")
+        f.write("\t\t--" + arg + ") shift\n\t\t\t\t\t" + arg  + "=$1\n\t\t\t\t\t;;\n")
     f.write("\tesac\n\tshift\ndone")
     f.close()
 

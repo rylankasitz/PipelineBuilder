@@ -1,13 +1,14 @@
 {
     "test" : {
+        "block_type": "programblock",
         "name" : "test",
         "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
         "inputs" : [
-            "$directoryName",
-            "$otherDirectoryName"
+            "directoryName",
+            "otherDirectoryName"
         ],
         "outputs" : [
-            "$foundDirectories"
+            "foundDirectories"
         ],
         "sbatch" : [
             "--time=1:00"
