@@ -1,15 +1,15 @@
 class Program():
-    self.block_type = "program"
-    self.name = ""
-    self.outputs = {}
+    block_type = "program"
+    name = ""
+    outputs = {}
 
 class Constant():
-    self.block_type = "constant"
-    self.value = ""
-    self.outputs = {}
+    block_type = "constant"
+    value = ""
+    outputs = {}
 
 class ForLoop():
-    self.block_type = "forloop"
-    self.mapping = ""
-    self.outputs = {}
-    self.body = {}
+    block_type = "forloop"
+    mapping = ""
+    outputs = {}
+    body = {}
