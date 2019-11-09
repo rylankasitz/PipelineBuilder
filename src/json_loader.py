@@ -1,10 +1,11 @@
 import json
 
+_TYPE_KEY = "block_type"
 _REGISTERED_CLASSES = {}
 
 def register(block_type):
     def wrapper(cls):
-        setattr(cls, "block_type", block_type)
+        setattr(cls, _TYPE_KEY, block_type)
         _REGISTERED_CLASSES[block_type] = cls
         return cls
     return wrapper
@@ -25,7 +26,7 @@ def load_config(file_name):
     return loaded
 
 def load_block(config_dict):
-    block_type = config_dict["block_type"]
+    block_type = config_dict[_TYPE_KEY]
     block_class = _REGISTERED_CLASSES[block_type]
     attribs = [a for a in dir(block_class) if not (a.startswith('__') and a.endswith('__'))]
     instance = block_class()
@@ -42,11 +43,4 @@ def write_config(file_name, config):
 
     with open(file_name, "w") as fp:
         json.dump(config, fp)
-
-blocks = load_config("temp.json")
-
-for k, v in blocks.items():
-    print(k +": "+ str(v.__dict__))
-    
-write_config("out.json", blocks)
 

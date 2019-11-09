@@ -1,27 +1,42 @@
 
 {
-  "uuid": {
-    "block_type": "program",
-    "name": "blockName",
-    "outputs": {
-      "uuid": "argValue"
-    }
-  },
-  "uuid":{
-    "block_type": "constant",
-    "value": "100",
-    "outputs": {
-      "uuid": "argValue"
-    }
-  },
-  "uuid": {
-    "block_type": "forLoop",
-    "mapping": "command",
-    "outputs": {
-      "uuid": "argValue"
+  "block_type": "pipeline",
+  "blocks": {
+    "uuid": {
+      "block_type": "program",
+      "name": "blockName",
+      "outputs": [
+        {
+          "input_uuid": "uuid",
+          "output_name": "name",
+          "input_name": "argValue"
+        }
+      ]
     },
-    "body": {
-      "pipeline":""
+    "uuid":{
+      "block_type": "constant",
+      "value": "100",
+      "outputs": [
+        {
+          "input_uuid": "uuid",
+          "output_name": "name",
+          "input_name": "argValue"
+        }
+      ]
+    },
+    "uuid": {
+      "block_type": "forLoop",
+      "mapping": "command",
+      "outputs": [
+        {
+          "input_uuid": "uuid",
+          "output_name": "name",
+          "input_name": "argValue"
+        }
+      ],
+      "body": {
+        "pipeline":""
+      }
     }
   }
 }
