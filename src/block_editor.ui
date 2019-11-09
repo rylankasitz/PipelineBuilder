@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="tk.Toplevel" id="main_window">
+    <property name="maxsize">600|500</property>
+    <property name="minsize">600|500</property>
+    <property name="padx">55</property>
+    <property name="pady">10</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">Custom Program Block Editor</property>
+    <child>
+      <object class="ttk.Labelframe" id="command_lf">
+        <property name="height">200</property>
+        <property name="padding">0</property>
+        <property name="text" translatable="yes">Command</property>
+        <property name="width">200</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="command_ent">
+            <property name="font">TkDefaultFont</property>
+            <property name="justify">left</property>
+            <property name="state">normal</property>
+            <property name="textvariable">string:boolion</property>
+            <property name="validate">focus</property>
+            <property name="width">80</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Labelframe" id="sbatch_lf">
+        <property name="height">200</property>
+        <property name="text" translatable="yes">Sbatch Command Options</property>
+        <property name="width">200</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+        </layout>
+        <child>
+          <object class="tk.Text" id="sbatch_txtbox">
+            <property name="font">TkDefaultFont</property>
+            <property name="height">6</property>
+            <property name="state">normal</property>
+            <property name="text" translatable="yes">#!/bin/bash -l
+#SBATCH --job-name=custom_job
+#SBATCH --nodes=1
+#SBATCH --time=0-08:00:00
+#SBATCH --output="%x_%j.o"
+#SBATCH --error="%x_%j.e"</property>
+            <property name="width">80</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Separator" id="Separator_5">
+        <property name="orient">horizontal</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+          <property name="sticky">ew</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Labelframe" id="input_lb">
+        <property name="height">200</property>
+        <property name="text" translatable="yes">Inputs</property>
+        <property name="width">200</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">3</property>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="input_ent_1">
+            <property name="width">80</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="new_input_btn">
+            <property name="command">add_input_entry</property>
+            <property name="default">normal</property>
+            <property name="text" translatable="yes">+ Add New Input</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">10</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Separator" id="Separator_6">
+        <property name="orient">horizontal</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">4</property>
+          <property name="sticky">ew</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Labelframe" id="Labelframe_6">
+        <property name="height">200</property>
+        <property name="text" translatable="yes">Outputs</property>
+        <property name="width">200</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">5</property>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="output_ent_1">
+            <property name="width">80</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Button" id="new_output_btn">
+            <property name="command">add_output_entry</property>
+            <property name="default">normal</property>
+            <property name="text" translatable="yes">+ Add New Output</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">10</property>
+              <property name="sticky">w</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="generate_btn">
+        <property name="cursor">arrow</property>
+        <property name="text" translatable="yes">Generate Block</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">7</property>
+          <property name="sticky">e</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Separator" id="Separator_1">
+        <property name="orient">horizontal</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">6</property>
+          <property name="sticky">ew</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
