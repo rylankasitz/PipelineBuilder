@@ -1,3 +1,6 @@
+import os
+import json_loader
+
 def create_shell_file(file_, shell_args):
     f = open(file_, "w+")
     f.write("#!/bin/bash\n")
@@ -18,3 +21,14 @@ def append_to_file(file_, text):
     f = open(file_, "a")
     f.write(text)
     f.close()
+
+def get_pipeline(name):
+    config_file = os.path.dirname(os.path.abspath(__file__)) + "\\..\\pipelines\\" + name + "\\config.json"
+    return json_loader.load_config(config_file)
+
+def get_blocks():
+    config_file = os.path.dirname(os.path.abspath(__file__)) + "\\..\\programs\\blocks.json"
+    return json_loader.load_config(config_file) 
+
+def get_block(name):
+    return get_blocks[name]

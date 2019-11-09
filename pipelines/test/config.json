@@ -1,0 +1,55 @@
+
+{
+    "type": "pipeline",
+    "outputs": [
+        {
+          "type": "output",
+          "input_uuid": "forloop1",
+          "output_name": "input",
+          "input_name": "list"
+        }
+    ],
+    "blocks": {
+      "forloop1": {
+        "type": "forLoop",
+        "mapping": "*.txt",
+        "outputs": [],
+        "body": {
+          "type": "pipeline",
+          "outputs": [
+            {
+              "type": "output",
+              "input_uuid": "program1",
+              "output_name": "input",
+              "input_name": "__forarg__"
+            }
+          ],
+          "program1": {
+            "type": "program",
+            "name": "blockName",
+            "outputs": [
+                {
+                  "type": "output",
+                  "input_uuid": "forloop1",
+                  "output_name": "ouptput",
+                  "input_name": "argValue"
+                }
+            ]
+          },
+          "constant1": {
+              "type": "constant",
+              "value": "100",
+              "outputs": [
+                {
+                  "type": "output",
+                  "input_uuid": "program1",
+                  "output_name": "100",
+                  "input_name": "count"
+                }
+              ]
+          }
+        }
+      }
+    }
+  }
+  
