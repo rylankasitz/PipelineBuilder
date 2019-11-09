@@ -1,12 +1,21 @@
 
 {
-  "block_type": "pipeline",
+  "type": "pipeline",
+  "outputs": [
+      {
+        "type": "output",
+        "input_uuid": "uuid",
+        "output_name": "name",
+        "input_name": "argValue"
+      }
+  ],
   "blocks": {
     "uuid": {
-      "block_type": "program",
+      "type": "program",
       "name": "blockName",
       "outputs": [
         {
+          "type": "output",
           "input_uuid": "uuid",
           "output_name": "name",
           "input_name": "argValue"
@@ -14,10 +23,11 @@
       ]
     },
     "uuid":{
-      "block_type": "constant",
+      "type": "constant",
       "value": "100",
       "outputs": [
         {
+          "type": "output",
           "input_uuid": "uuid",
           "output_name": "name",
           "input_name": "argValue"
@@ -25,17 +35,18 @@
       ]
     },
     "uuid": {
-      "block_type": "forLoop",
+      "type": "forLoop",
       "mapping": "command",
       "outputs": [
         {
+          "type": "output",
           "input_uuid": "uuid",
           "output_name": "name",
           "input_name": "argValue"
         }
       ],
       "body": {
-        "pipeline":""
+        "json is rarted, this is comment stating the its pipeline":""
       }
     }
   }

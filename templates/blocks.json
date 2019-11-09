@@ -1,5 +1,6 @@
 {
     "listItemsInDirectory" : {
+        "type": "program_block",
         "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
         "inputs" : [
             "$directoryName",

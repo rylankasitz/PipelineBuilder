@@ -1,22 +1,28 @@
 from json_loader import register
 
+@register("output")
+class Outputs():
+    input_uuid = ""
+    output_name = ""
+    input_name = ""
+
 @register("pipeline")
 class Pipeline():
     blocks = {}
-    arg_names = {}
-    outputs = {}
+    outputs = []
 
 @register("program")
 class Program():
     name = ""
-    outputs = {}
+    outputs = []
+
 @register("constant")
 class Constant():
     value = ""
-    outputs = {}
+    outputs = []
 
 @register("forloop")
 class ForLoop():
     mapping = ""
-    outputs = {}
+    outputs = []
     body = {}

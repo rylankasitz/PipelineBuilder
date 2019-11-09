@@ -1,6 +1,6 @@
 import json
 
-_TYPE_KEY = "block_type"
+_TYPE_KEY = "type"
 _REGISTERED_CLASSES = {}
 
 def register(block_type):
@@ -13,21 +13,23 @@ def register(block_type):
 def load_config(file_name):
     with open(file_name) as fp:
         loaded = json.load(fp)
-
-    for k, v in loaded.items():
-        block = load_block(v)
-        loaded[k] = block
-
     return loaded
 
 def load_block(config_dict):
-    block_type = config_dict[_TYPE_KEY]
-    block_class = _REGISTERED_CLASSES[block_type]
-    attribs = [a for a in dir(block_class) if not (a.startswith('__') and a.endswith('__'))]
-    instance = block_class()
-    for a in attribs:
-        setattr(instance, a, config_dict[a])
-    return instance
+    if _TYPE_KEY in config_dict:
+        block_type = config_dict[_TYPE_KEY]
+        block_class = _REGISTERED_CLASSES[block_type]
+        attribs = [a for a in dir(block_class) if not (a.startswith('__') and a.endswith('__'))]
+        instance = block_class()
+        for a in attribs:
+            setattr(instance, a, load_block(config_dict[a]))
+        return instance
+    elif isinstance(config_dict, dict):
+        return [load_block(x) for x in config_dict]
+    elif isinstance(config_dict, list):
+        return [load_block(x) for x in config_dict]
+    else:
+        config_dict
 
 def write_block(block):
     return block.__dict__
