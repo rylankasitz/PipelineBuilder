@@ -1,0 +1,14 @@
+
+{
+    "blockTypeName" : "listItemsInDirectory",
+    "command" : "ls $directoryName >> $foundDirectories",
+    "inputs" : [
+        "$directoryName"
+    ],
+    "outputs" : [
+        "$foundDirectories"
+    ],
+    "sbatch" : [
+        
+    ]
+}
