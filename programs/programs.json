@@ -1,0 +1,16 @@
+{
+    "test" : {
+        "name" : "test",
+        "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
+        "inputs" : [
+            "$directoryName",
+            "$otherDirectoryName"
+        ],
+        "outputs" : [
+            "$foundDirectories"
+        ],
+        "sbatch" : [
+            "--time=1:00"
+        ]
+    }
+}

@@ -3,11 +3,13 @@ import os
 
 import utils
 import configs.program_config as program_config
+import json_loader
 
 program_name = sys.argv[1]
+config_name = os.path.dirname(os.path.abspath(__file__)) + "\\..\\programs\\programs.json"
 
 # test data
-program = program_config.ProgramBlock()
+program = json_loader.load_config()
 program.command = "python test.py $one -t $two > $three"
 program.inputs = ["one", "two"]
 program.outputs = ["three"]
