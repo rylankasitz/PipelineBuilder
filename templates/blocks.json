@@ -1,15 +1,15 @@
-
 {
-    "block_name" : "listItemsInDirectory",
-    "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
-    "inputs" : [
-        "$directoryName",
-        "$otherDirectoryName"
-    ],
-    "outputs" : [
-        "$foundDirectories"
-    ],
-    "sbatch" : [
-        
-    ]
+    "listItemsInDirectory" : {
+        "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
+        "inputs" : [
+            "$directoryName",
+            "$otherDirectoryName"
+        ],
+        "outputs" : [
+            "$foundDirectories"
+        ],
+        "sbatch" : [
+            
+        ]
+    }
 }
