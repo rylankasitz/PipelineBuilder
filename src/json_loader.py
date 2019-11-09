@@ -10,11 +10,6 @@ def register(block_type):
         return cls
     return wrapper
 
-@register("program")
-class Config():
-    attrib1 = ""
-    attrib2 = ""
-
 def load_config(file_name):
     with open(file_name) as fp:
         loaded = json.load(fp)
