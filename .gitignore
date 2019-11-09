@@ -1,6 +1,7 @@
 # User ignore
-pipelines/*
-programs/*
+pipelines/
+programs/
+virtualenvs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
