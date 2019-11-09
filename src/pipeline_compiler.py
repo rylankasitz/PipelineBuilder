@@ -21,6 +21,13 @@ class Env:
         self.program_location = ""
         self.inputs = {}
 
+    def add_input(self, uuid, out):
+        if uuid in self.inputs:
+            self.inputs[uuid].append(out)
+        else:
+            self.inputs[uuid] = [out]
+
+
 def compile_(env, block):
     return {
         "pipeline": compile_pipeline,
@@ -31,10 +38,9 @@ def compile_(env, block):
 
 def compile_pipeline(env, pipe):
     for out in pipe.outputs:
-        if out.input_uuid in env.inputs:
-            env.inputs[out.input_uuid].append(out)
-        else:
-            env.inputs[out.input_uuid] = [out]
+        env.add_input(out.input_uuid, out)
+
+    setup_constants(env, (b for _, b in pipe.blocks.items() if b.type == "constant"))
 
     steps = len(pipe.blocks)
     shell = utils.get_shell_args(['directoryname'] + [output.output_name for output in pipe.outputs])
@@ -65,11 +71,7 @@ def compile_program(env, block):
                 output_file
             )
             out.output_name = output_file
-            if out.input_uuid in env.inputs:
-                env.inputs[out.input_uuid].append(out)
-            else:
-                env.inputs[out.input_uuid] = [out]
-           
+            env.add_input(out.input_uuid, out)
             yield arg
 
     args =  " ".join(gen_inputs()) + " " + " ".join(gen_outputs())
@@ -90,6 +92,10 @@ def flatten_blocks(blocks):
     new_blocks.sort(key=lambda val: val.run_order)
     return new_blocks
 
+def setup_constants(env, constants):
+    for const in constants:
+        for out in const.outputs:
+            env.add_input(out.input_uuid, out)
 
 #pipeline = utils.get_pipeline("test")
 
