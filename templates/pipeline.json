@@ -1,21 +1,21 @@
 
 {
   "uuid": {
-    "blockType": "program",
+    "block_type": "program",
     "name": "blockName",
     "outputs": {
       "uuid": "argValue"
     }
   },
   "uuid":{
-    "blockType": "constant",
+    "block_type": "constant",
     "value": "100",
     "outputs": {
       "uuid": "argValue"
     }
   },
   "uuid": {
-    "blockType": "forLoop",
+    "block_type": "forLoop",
     "mapping": "command",
     "outputs": {
       "uuid": "argValue"

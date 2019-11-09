@@ -1,9 +1,10 @@
 
 {
-    "blockTypeName" : "listItemsInDirectory",
-    "command" : "ls $directoryName >> $foundDirectories",
+    "block_name" : "listItemsInDirectory",
+    "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
     "inputs" : [
-        "$directoryName"
+        "$directoryName",
+        "$otherDirectoryName"
     ],
     "outputs" : [
         "$foundDirectories"
