@@ -1,57 +1,43 @@
-import os
-import tkinter as tk
 from tkinter import *
-import pygubu
+from tkinter.filedialog import askopenfilename
 
-UI_FILE = "main.ui"
-
-class Application(pygubu.TkApplication):
+class MyFirstGUI:
+    _configs = []
     
-    def _create_ui(self):
+    CANVAS_WIDTH = 400
+    CANVAS_HEIGHT = 400
 
-        self.builder = builder = pygubu.Builder()
-        
-        builder.add_from_file(UI_FILE)
-        
-        self.mainwindow = builder.get_object('mainwindow', self.master)
-        
-        self.mainmenu = menu = builder.get_object('menu', self.master)
-        self.set_menu(menu)
-        
-        self.canvas = builder.get_object('canvas')
-        
-        self.node = Node(builder, self.canvas)
-        self.node = Node(builder, self.canvas, x=200, y=200)
-        
-        builder.connect_callbacks(self)
-            
-    def run(self):
-        self.mainwindow.mainloop()
+    def __init__(self, master):
+        self.master = master
+        master.title("Build-A-Pipeline")
 
-class Node():
-    
-    def __init__(self, builder, canvas, x=100, y=100):   
-        
-        self.canvas = canvas
-        self.offsetX = 0
-        self.offsetY = 0
-        
-        frame = Frame(canvas, width=200, height=200, background="red")
-        frame.bind('<B1-Motion>', self.move)
-        frame.bind('<Button-1>', self.press)
+        self.greet_button = Button(
+            master, text="Load block config", command=self.load_block_config
+        )
 
-        self.node = self.canvas.create_window(x, y, window=frame)      
+        self.greet_button.grid(row=0, column=0)
 
-    def press(self, event):
-        self.offsetX = self.canvas.canvasx(event.x)
-        self.offsetY = self.canvas.canvasy(event.y)
-    
-    def move(self, event): 
-        x = self.canvas.canvasx(event.x)
-        y = self.canvas.canvasy(event.y)
-        self.canvas.move(self.node, x - self.offsetX, y - self.offsetY)
+        self.blocks_lb = Listbox(master)
+        self.blocks_lb.grid(row=1, column=0)
 
 
-root = tk.Tk()
-app = Application(root)
-app.run()
+        self.pipe_line_c = Canvas(
+            master, 
+            width=self.CANVAS_WIDTH,
+            height=self.CANVAS_HEIGHT,
+            bd=3,
+            relief=ridge
+        )
+        self.pipe_line_c.grid(row=1, column=1)
+
+    def load_block_config(self):
+        path = askopenfilename()
+        self.blocks_lb.insert(END, "BLOCK"+path.split('/')[-1])
+
+
+
+        
+
+root = Tk()
+my_gui = MyFirstGUI(root)
+root.mainloop()
