@@ -16,6 +16,7 @@ def load_config(file_name):
     return load_block(loaded)
 
 def load_block(config_dict):
+    print(config_dict)
     if _TYPE_KEY in config_dict:
         block_type = config_dict[_TYPE_KEY]
         block_class = _REGISTERED_CLASSES[block_type]
