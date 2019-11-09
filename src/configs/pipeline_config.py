@@ -1,15 +1,15 @@
 class Program():
-    block_type = "program"
+    block_type = ""
     name = ""
     outputs = {}
 
 class Constant():
-    block_type = "constant"
+    block_type = ""
     value = ""
     outputs = {}
 
 class ForLoop():
-    block_type = "forloop"
+    block_type = ""
     mapping = ""
     outputs = {}
     body = {}
