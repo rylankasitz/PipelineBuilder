@@ -1,18 +1,21 @@
 {
-    "test" : {
+    "add_count" : {
         "type": "program_block",
-        "name" : "test",
-        "location": "",
-        "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
+        "name" : "add_count",
+        "location": "/../test_programs/",
+        "command" : "sbatch $repeat --input $input --count $count --output $output",
         "inputs" : [
-            "directoryName",
-            "otherDirectoryName"
+            "input",
+            "count"
         ],
         "outputs" : [
-            "foundDirectories"
+            "output"
         ],
         "sbatch" : [
             "--time=1:00"
-        ]
+        ],
+        "output_types" : {
+            "output" : ".txt"
+        }
     }
 }
