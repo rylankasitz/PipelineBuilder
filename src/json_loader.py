@@ -31,13 +31,26 @@ def load_block(config_dict):
         return [load_block(x) for x in config_dict]
     return config_dict
 
+
 def write_block(block):
     return block.__dict__
 
 def write_config(file_name, config):
-    for k, v in config.items():
-        config[k] = write_block(v)
+    converted = convert_to_dict(config)
 
     with open(file_name, "w") as fp:
-        json.dump(config, fp)
+        json.dump(converted, fp)
 
+def convert_to_dict(obj):
+    if hasattr(obj, "__dict__"):
+        return convert_to_dict(obj.__dict__)
+    elif isinstance(obj, dict):
+        for k, v in obj.items():
+            obj[k] = convert_to_dict(v)
+        return obj
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            obj[i] = convert_to_dict(v)
+        return obj
+    else:
+        return obj
