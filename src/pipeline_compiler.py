@@ -33,7 +33,6 @@ def compile_(env, block):
         "pipeline": compile_pipeline,
         "program": compile_program,
         "loop": compile_loop,
-        "constant": compile_constant,
     }[block.type](env, block)
 
 def compile_pipeline(env, pipe):
@@ -79,9 +78,6 @@ def compile_program(env, block):
     return line
 
 def compile_loop(env, loop):
-    return ""
-
-def compile_constant(env, constant):
     return ""
 
 def flatten_blocks(blocks):
