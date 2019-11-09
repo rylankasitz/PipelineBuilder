@@ -1,15 +1,17 @@
+from json_loader import register
+
+@register("program")
 class Program():
-    block_type = ""
     name = ""
     outputs = {}
 
+@register("constant")
 class Constant():
-    block_type = ""
     value = ""
     outputs = {}
 
+@register("forloop")
 class ForLoop():
-    block_type = ""
     mapping = ""
     outputs = {}
     body = {}
