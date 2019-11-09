@@ -6,14 +6,14 @@ def add_excecution_order(blocks, outputs, run_num):
         if not hasattr(blocks[output.input_uuid], "run_order"):
             blocks[output.input_uuid].run_order = 0
 
-        if blocks[output.input_uuid].type == "pipeline":
-            add_excecution_order(blocks[output.input_uuid].blocks, blocks[output.input_uuid].outputs, 0)
+        if blocks[output.input_uuid].type == "loop":
+            add_excecution_order(blocks[output.input_uuid].body.blocks, blocks[output.input_uuid].body.outputs, 0)
 
         blocks[output.input_uuid].run_order = max(blocks[output.input_uuid].run_order, run_num + 1)
-        add_excecution_order(blockes, blocks[output.input_uuid].outputs, run_num + 1)
+        add_excecution_order(blocks, blocks[output.input_uuid].outputs, run_num + 1)
 
-pipeline = utils.get_pipeline(sys.argv[1])
+pipeline = utils.get_pipeline("test")
 
 add_excecution_order(pipeline.blocks, pipeline.outputs, 0)
 
-print(pipeline)
+utils.pretty_print(utils.convert_to_dict(pipeline))

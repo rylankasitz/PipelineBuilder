@@ -2,6 +2,7 @@ import os
 import json_loader
 import configs.program_config
 import configs.pipeline_config
+import pprint
 
 def create_shell_file(file_, shell_args):
     f = open(file_, "w+")
@@ -40,7 +41,7 @@ def get_block(name):
 
 def convert_to_dict(obj):
     if hasattr(obj, "__dict__"):
-        return obj.__dict__
+        return convert_to_dict(obj.__dict__)
     elif isinstance(obj, dict):
         for k, v in obj.items():
             obj[k] = convert_to_dict(v)
@@ -49,5 +50,11 @@ def convert_to_dict(obj):
         for i, v in enumerate(obj):
             obj[i] = convert_to_dict(v)
         return obj
+    else:
+        return obj
+
+def pretty_print(dict_):
+    pp = pprint.PrettyPrinter(indent=1)
+    pp.pprint(dict_)
 
 

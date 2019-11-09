@@ -1,55 +1,63 @@
-
 {
     "type": "pipeline",
     "outputs": [
         {
-          "type": "output",
-          "input_uuid": "forloop1",
-          "output_name": "input",
-          "input_name": "list"
+            "type": "output",
+            "input_uuid": "forloop1",
+            "output_name": "input",
+            "input_name": "list"
         }
     ],
     "blocks": {
-      "forloop1": {
-        "type": "loop",
-        "mapping": "*.txt",
-        "outputs": [],
-        "body": {
-          "type": "pipeline",
-          "outputs": [
-            {
-              "type": "output",
-              "input_uuid": "program1",
-              "output_name": "input",
-              "input_name": "__forarg__"
+        "forloop1": {
+            "uuid": "forloop1",
+            "type": "loop",
+            "mapping": "*.txt",
+            "outputs": [],
+            "body": {
+                "type": "pipeline",
+                "outputs": [
+                    {
+                        "type": "output",
+                        "input_uuid": "program1",
+                        "output_name": "input",
+                        "input_name": "__loop__"
+                    }
+                ],
+                "blocks": {
+                    "program1": {
+                        "uuid": "program1",
+                        "type": "program",
+                        "name": "test",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": "program2",
+                                "output_name": "output",
+                                "input_name": "input"
+                            }
+                        ]
+                    },
+                    "program2": {
+                        "uuid": "program1",
+                        "type": "program",
+                        "name": "test",
+                        "outputs": []
+                    },
+                    "constant1": {
+                        "type": "constant",
+                        "value": "100",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": "program1",
+                                "output_name": "100",
+                                "input_name": "count"
+                            }
+                        ]
+                    }
+                }
             }
-          ],
-          "program1": {
-            "type": "program",
-            "name": "blockName",
-            "outputs": [
-                {
-                  "type": "output",
-                  "input_uuid": "forloop1",
-                  "output_name": "ouptput",
-                  "input_name": "argValue"
-                }
-            ]
-          },
-          "constant1": {
-              "type": "constant",
-              "value": "100",
-              "outputs": [
-                {
-                  "type": "output",
-                  "input_uuid": "program1",
-                  "output_name": "100",
-                  "input_name": "count"
-                }
-              ]
-          }
         }
-      }
     }
-  }
-  
+}

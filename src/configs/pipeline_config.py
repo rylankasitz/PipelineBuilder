@@ -13,6 +13,7 @@ class Pipeline():
 
 @register("program")
 class Program():
+    uuid = ""
     name = ""
     outputs = []
 
@@ -23,6 +24,7 @@ class Constant():
 
 @register("loop")
 class Loop():
+    uuid = ""
     mapping = ""
     outputs = []
     body = {}
