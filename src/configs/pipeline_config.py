@@ -8,6 +8,7 @@ class Outputs():
 
 @register("pipeline")
 class Pipeline():
+    uuid = ""
     blocks = {}
     outputs = []
 

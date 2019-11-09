@@ -8,3 +8,4 @@ class ProgramBlock():
     inputs = list()
     outputs = list()
     sbatch = list()
+    output_types = {}
