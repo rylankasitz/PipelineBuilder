@@ -1,4 +1,4 @@
-class Program():
+class ProgramBlock():
     self.block_name = ""
     self.command = ""
     self.inputs = list()
