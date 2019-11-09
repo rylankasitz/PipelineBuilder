@@ -21,8 +21,8 @@ class Constant():
     value = ""
     outputs = []
 
-@register("forloop")
-class ForLoop():
+@register("loop")
+class Loop():
     mapping = ""
     outputs = []
     body = {}

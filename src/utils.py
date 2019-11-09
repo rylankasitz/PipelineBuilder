@@ -1,5 +1,7 @@
 import os
 import json_loader
+import configs.program_config
+import configs.pipeline_config
 
 def create_shell_file(file_, shell_args):
     f = open(file_, "w+")
@@ -22,6 +24,9 @@ def append_to_file(file_, text):
     f.write(text)
     f.close()
 
+def export_path_in_shell(file_, path):
+    append_to_file(file_, 'export PATH="' + path + ':$PATH"\n\n')
+
 def get_pipeline(name):
     config_file = os.path.dirname(os.path.abspath(__file__)) + "\\..\\pipelines\\" + name + "\\config.json"
     return json_loader.load_config(config_file)
@@ -31,4 +36,4 @@ def get_blocks():
     return json_loader.load_config(config_file) 
 
 def get_block(name):
-    return get_blocks[name]
+    return get_blocks()[name]

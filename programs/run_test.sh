@@ -1,6 +1,8 @@
 #!/bin/bash
 #SBATCH--time=1:00
 
+export PATH=":$PATH"
+
 while [ "$1" != "" ]; do
 	case $1 in
 		--directoryName) shift
