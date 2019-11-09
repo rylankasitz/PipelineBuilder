@@ -1,6 +1,6 @@
 from json_loader import register
 
-@register("programblock")
+@register("program_block")
 class ProgramBlock():
     name = ""
     command = ""

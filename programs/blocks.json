@@ -1,6 +1,6 @@
 {
     "test" : {
-        "block_type": "programblock",
+        "type": "program_block",
         "name" : "test",
         "command" : "ls $directoryName $otherDirectoryName >> $foundDirectories",
         "inputs" : [
