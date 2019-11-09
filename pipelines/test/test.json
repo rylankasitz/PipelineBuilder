@@ -1,0 +1,57 @@
+{
+    "type": "pipeline",
+    "uuid": "main_pipe",
+    "outputs": [
+        {
+            "type": "output",
+            "input_uuid": "program1",
+            "output_name": "output",
+            "input_name": "input"
+        }
+    ],
+    "blocks": {
+        "program1": {
+            "uuid": "program1",
+            "type": "program",
+            "name": "add_count",
+            "outputs": [
+                {
+                    "type": "output",
+                    "input_uuid": "program2",
+                    "output_name": "output",
+                    "input_name": "inputs"
+                }
+            ]
+        },
+        "program2": {
+            "uuid": "program2",
+            "type": "program",
+            "name": "add_count",
+            "outputs": []
+        },
+        "constant1": {
+            "type": "constant",
+            "value": "100",
+            "outputs": [
+                {
+                    "type": "output",
+                    "input_uuid": "program1",
+                    "output_name": "100",
+                    "input_name": "count"
+                }
+            ]
+        },
+        "constant2": {
+            "type": "constant",
+            "value": "50",
+            "outputs": [
+                {
+                    "type": "output",
+                    "input_uuid": "program2",
+                    "output_name": "50",
+                    "input_name": "count"
+                }
+            ]
+        }
+    }
+}

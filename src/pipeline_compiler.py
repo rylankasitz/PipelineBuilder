@@ -27,12 +27,26 @@ def compile_(env, block):
         "program": compile_program,
         "loop": compile_loop,
         "constant": compile_constant,
-    }[block.type](block)
+    }[block.type](env, block)
 
 def compile_pipeline(env, pipe):
-    for b in pipe.blocks:
-        compile_(b)
-    # ending stuff
+    for out in pipe.outputs:
+        if out.input_uuid in env.inputs:
+            env.inputs[out.input_uuid].append(out)
+        else:
+            env.inputs[out.input_uuid] = [out]
+
+    steps = len(pipe.blocks)
+    shell = utils.get_shell_args(['directoryname'] + [output.output_name for output in pipe.outputs])
+    shell += 'step=0\nuuid="init"\ntouch $directoryname/../$uuid.done\n\n'
+    shell += 'while [ "$step" -lt "' + str(steps) + '" ]; do\n\tfile=$directoryname/../$uuid.done'
+    for uuid, block in pipe.blocks.items():
+        compiled = compile_(env, block)
+        print(compiled)
+        shell += '\n\t\tif [ -f "$file" ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + uuid + "\n\t\tfi"
+    shell += "\n\tsleep 5\ndone"
+    shell += "\ntouch $directoryname/../<pipeline_uuid>.done"
+    return shell
 
 def compile_program(env, block):
     program_block = utils.get_block(block.name)
@@ -51,18 +65,22 @@ def compile_program(env, block):
                 block.name,
                 output_type
             )
-            env.inputs[out.input_uuid] = out
+            if out.input_uuid in env.inputs:
+                env.inputs[out.input_uuid].append(out)
+            else:
+                env.inputs[out.input_uuid] = [out]
+           
             yield arg
 
     args =  " ".join(gen_inputs()) + " " + " ".join(gen_outputs())
     line = "sbatch {}/run_{}.sh {}".format(env.program_location, block.name, args)
-    print(line)
+    return line
 
 def compile_loop(env, loop):
-    pass
+    return ""
 
 def compile_constant(env, constant):
-    pass
+    return ""
 
 #pipeline = utils.get_pipeline("test")
 
@@ -75,21 +93,7 @@ env = Env()
 env.directory = "dir"
 env.program_location = "progs"
 
-a = configs.pipeline_config.Outputs()
-a.input_uuid = "program1"
-a.output_name = "some_outputed_file.txt"
-a.input_name = "input"
+prog = json_loader.load_config("pipelines/test/test.json")
 
-b = configs.pipeline_config.Outputs()
-b.input_uuid = "program1"
-b.output_name = "some_count_file.txt"
-b.input_name = "count"
-
-env.inputs = {
-    "program1": [a, b]
-}
-
-prog = json_loader.load_config("pipelines/test/program_config.json")
-
-compile_program(env, prog)
+print(compile_(env, prog))
 
