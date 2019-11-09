@@ -10,6 +10,7 @@ class Pipeline():
 class Program():
     name = ""
     outputs = {}
+    
 @register("constant")
 class Constant():
     value = ""
