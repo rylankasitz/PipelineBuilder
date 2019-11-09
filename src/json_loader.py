@@ -13,7 +13,7 @@ def register(block_type):
 def load_config(file_name):
     with open(file_name) as fp:
         loaded = json.load(fp)
-    return loaded
+    return load_block(loaded)
 
 def load_block(config_dict):
     if _TYPE_KEY in config_dict:
@@ -25,11 +25,11 @@ def load_block(config_dict):
             setattr(instance, a, load_block(config_dict[a]))
         return instance
     elif isinstance(config_dict, dict):
-        return [load_block(x) for x in config_dict]
+        for k, v in config_dict.items():
+            config_dict[k] = load_block(v)
     elif isinstance(config_dict, list):
         return [load_block(x) for x in config_dict]
-    else:
-        config_dict
+    return config_dict
 
 def write_block(block):
     return block.__dict__
