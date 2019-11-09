@@ -59,12 +59,12 @@ def compile_program(env, block):
     def gen_outputs():
         for out in block.outputs:
             output_type = program_block.output_types[out.output_name]
-            arg = "--{} {}/../{}{}".format(
+            output_file = "$directoryname/../" + block.name + output_type
+            arg = "--{} {}".format(
                 out.output_name,
-                env.directory,
-                block.name,
-                output_type
+                output_file
             )
+            out.output_name = output_file
             if out.input_uuid in env.inputs:
                 env.inputs[out.input_uuid].append(out)
             else:

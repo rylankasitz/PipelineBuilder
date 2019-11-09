@@ -1,0 +1,13 @@
+{
+    "uuid": "program1",
+    "type": "program",
+    "name": "add_count",
+    "outputs": [
+        {
+            "type": "output",
+            "input_uuid": "program2",
+            "output_name": "output",
+            "input_name": "input"
+        }
+    ]
+}
