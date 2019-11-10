@@ -21,6 +21,6 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-sbatch $repeat --input $input --count $count --output $output
+sbatch /homes/rylankasitz/PipelineBuilder/test_programs/repeat.sh --input $input --count $count --output $output
 
 touch $done

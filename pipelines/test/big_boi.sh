@@ -22,29 +22,28 @@ while [ "$step" -lt "1" ]; do
 	if [ -f "$file" ]
 	then
 		rm $directoryname/.steps/$uuid.done
-		if [ "$step" == 0]
+		if [ "$step" == 0 ]
 		then
 			loopname=$input
 			file_counter=0
 
 			for entry in $loopname/*.txt
 			do
-				mkdir -p $loopname/../the_pipeline/$file_counter
-				sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\pipelines\test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline/
+				sbatch /homes/rylankasitz/PipelineBuilder/pipelines/test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline_$file_counter/
 				let file_counter++
 			done
 
-			while [ $(ls -lR $loopname/../the_pipeline/*.done | wc -l) -lt $file_counter ]; do
-				sleep 30
+			while [ $(ls -lR $loopname/../*.done | wc -l) -lt $file_counter ]; do
+				sleep 1
 			done
 
 			touch $directoryname/.steps/forloop1.done
-			rm $loopname/../the_pipeline/*.done
+			rm $loopname/../*.done
 
 			uuid=forloop1
 		fi
 		let "step++"
 	fi
-	sleep 5
+	sleep 1
 done
-touch $directoryname/big_boi.donemkdir -p $directoryname/step_files
+touch $directoryname/../$(uuidgen).done
