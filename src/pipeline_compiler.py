@@ -62,8 +62,8 @@ def compile_pipeline(env, pipe):
         shell += '\n\t\tif [ "$step" == ' + str(i) + ' ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + block.uuid + "\n\t\tfi"
         i+=1
 
-    shell += '\n\t\tlet "step++"\n\tfi\n\tsleep 5\ndone'
-    shell += "\ntouch $directoryname/" + pipe.uuid + ".done"
+    shell += '\n\t\tlet "step++"\n\tfi\n\tsleep 1\ndone'
+    shell += "\ntouch $directoryname/$(echo uuidgen).done"
 
     utils.create_shell_file(file_, []) # add shell args later
     utils.append_to_file(file_, shell)
@@ -113,7 +113,7 @@ def compile_loop(env, loop):
     shell += "\n\t\t\t\tsbatch " + env.pipeline_location + "/" + loop.body.name + ".sh --__loop__ $entry " 
     shell += "--directoryname " + output_shell
     shell += "\n\t\t\t\tlet file_counter++\n\t\t\tdone\n"
-    shell += '\n\t\t\twhile [ $(ls -lR ' + output_shell + '*.done | wc -l) -lt $file_counter ]; do\n\t\t\t\tsleep 30\n\t\t\tdone\n'
+    shell += '\n\t\t\twhile [ $(ls -lR ' + output_shell + '*.done | wc -l) -lt $file_counter ]; do\n\t\t\t\tsleep 1\n\t\t\tdone\n'
     shell += "\n\t\t\ttouch $directoryname/.steps/" + loop.uuid + ".done"
     shell += "\n\t\t\trm " + output_shell + "*.done\n"
 

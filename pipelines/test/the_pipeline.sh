@@ -17,23 +17,23 @@ uuid="init"
 mkdir -p $directoryname/.steps
 touch $directoryname/.steps/$uuid.done
 
-while [ "$step" -lt "4" ]; do
+while [ "$step" -lt "2" ]; do
 	file=$directoryname/.steps/$uuid.done
 	if [ -f "$file" ]
 	then
 		rm $directoryname/.steps/$uuid.done
 		if [ "$step" == 0 ]
 		then
-			sbatch /homes/rylankasitz/PipelineBuilder/programs/run_add_count.sh --input $__loop__ --count 100 --output $directoryname/add_count.txt --done $directoryname/.steps/program1.done
+			sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\programs/run_add_count.sh --input $__loop__ --count 100 --output $directoryname/add_count.txt --done $directoryname/.steps/program1.done
 			uuid=program1
 		fi
 		if [ "$step" == 1 ]
 		then
-			sbatch /homes/rylankasitz/PipelineBuilder/programs/run_add_count.sh --count 50 --input $directoryname/add_count.txt  --done $directoryname/.steps/program2.done
+			sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\programs/run_add_count.sh --count 50 --input $directoryname/add_count.txt --final_output $directoryname/final_output --done $directoryname/.steps/program2.done
 			uuid=program2
 		fi
 		let "step++"
 	fi
-	sleep 5
+	sleep 1
 done
-touch $directoryname/pipeline1.donemkdir -p $directoryname/step_files
+touch $directoryname/pipeline1.done
