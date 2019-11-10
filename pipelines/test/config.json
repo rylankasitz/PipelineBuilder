@@ -1,7 +1,7 @@
 {
     "type": "pipeline",
-    "uuid": "big_boi",
-    "name": "big_boi",
+    "uuid": "test",
+    "name": "test",
     "outputs": [
         {
             "type": "output",

@@ -4,7 +4,6 @@ from json_loader import register
 class ProgramBlock():
     name = ""
     command = ""
-    location = ""
     inputs = list()
     outputs = list()
     sbatch = list()
