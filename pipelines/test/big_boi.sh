@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export PATH="$(realpath "/pipelines/big_boi"):$PATH"
-
 while [ "$1" != "" ]; do
 	case $1 in
 		--directoryname) shift
@@ -16,11 +14,15 @@ done
 
 step=0
 uuid="init"
-touch $directoryname/$uuid.done
+mkdir -p $directoryname/.steps
+touch $directoryname/.steps/$uuid.done
 
 while [ "$step" -lt "1" ]; do
-	file=$directoryname/$uuid.done
-		if [ -f "$file" ]
+	file=$directoryname/.steps/$uuid.done
+	if [ -f "$file" ]
+	then
+		rm $directoryname/.steps/$uuid.done
+		if [ "$step" == 0]
 		then
 			loopname=$input
 			file_counter=0
@@ -36,11 +38,13 @@ while [ "$step" -lt "1" ]; do
 				sleep 30
 			done
 
-			touch $loopname/../forloop1.done
+			touch $directoryname/.steps/forloop1.done
 			rm $loopname/../the_pipeline/*.done
 
 			uuid=forloop1
 		fi
+		let "step++"
+	fi
 	sleep 5
 done
-touch $directoryname/big_boi.done
+touch $directoryname/big_boi.donemkdir -p $directoryname/step_files
