@@ -15,40 +15,46 @@
             "uuid": "loop",
             "type": "loop",
             "mapping": "*_greet.txt",
-            "outputs": [
-                {
-                    "type": "output",
-                    "input_uuid": "create_greeting",
-                    "output_name": "__loop__",
-                    "input_name": "to_who"
-                }
-            ],
+            "outputs": [],
             "body": {
-                "create_greeting": {
-                    "uuid": "create_greeting",
-                    "type": "program",
-                    "name": "say_hello",
-                    "outputs": [
-                        {
-                            "type": "output",
-                            "input_uuid": "create_letter",
-                            "output_name": "output",
-                            "input_name": "greeting"
-                        }
-                    ]
-                },
-                "create_letter": {
-                    "uuid": "create_letter",
-                    "type": "program",
-                    "name": "make_letter",
-                    "outputs": [
-                        {
-                            "type": "output",
-                            "input_uuid": null,
-                            "output_name": "output",
-                            "input_name": null
-                        }
-                    ]
+                "type": "pipeline",
+                "uuid": "edit_greetings",
+                "name": "edit_greetings",
+                "outputs": [
+                    {
+                        "type": "output",
+                        "input_uuid": "create_greeting",
+                        "output_name": "__loop__",
+                        "input_name": "to_who"
+                    }
+                ],
+                "blocks": {
+                    "create_greeting": {
+                        "uuid": "create_greeting",
+                        "type": "program",
+                        "name": "say_hello",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": "create_letter",
+                                "output_name": "output",
+                                "input_name": "greeting"
+                            }
+                        ]
+                    },
+                    "create_letter": {
+                        "uuid": "create_letter",
+                        "type": "program",
+                        "name": "make_letter",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": null,
+                                "output_name": "output",
+                                "input_name": null
+                            }
+                        ]
+                    }
                 }
             }
         }

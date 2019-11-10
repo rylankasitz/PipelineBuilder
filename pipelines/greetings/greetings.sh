@@ -5,8 +5,8 @@ while [ "$1" != "" ]; do
 		--directoryname) shift
 					directoryname=$1
 					;;
-		--greeting) shift
-					greeting=$1
+		--input) shift
+					input=$1
 					;;
 	esac
 	shift
@@ -17,20 +17,31 @@ uuid="init"
 mkdir -p $directoryname/.steps
 touch $directoryname/.steps/$uuid.done
 
-while [ "$step" -lt "2" ]; do
+while [ "$step" -lt "1" ]; do
 	file=$directoryname/.steps/$uuid.done
 	if [ -f "$file" ]
 	then
 		rm $directoryname/.steps/$uuid.done
 		if [ "$step" == 0 ]
 		then
-			sh /home/zach/Documents/Projects/Python/pipelinebuilder/programs/run_say_hello.sh --to_who $greeting --output $directoryname/say_hello.txt --done $directoryname/.steps/create_greeting.done
-			uuid=create_greeting
-		fi
-		if [ "$step" == 1 ]
-		then
-			sh /home/zach/Documents/Projects/Python/pipelinebuilder/programs/run_make_letter.sh --greeting $directoryname/say_hello.txt --output $directoryname/make_letter.txt --done $directoryname/.steps/create_letter.done
-			uuid=create_letter
+			loopname=$input
+			file_counter=0
+
+			for entry in $loopname/*_greet.txt
+			do
+
+				sbatch /homes/rylankasitz/PipelineBuilder/pipelines/greetings/edit_greetings.sh --__loop__ $entry --directoryname $loopname/../edit_greetings_$file_counter/
+				let file_counter++
+			done
+
+			while [ $(ls -lR $loopname/../*.done | wc -l) -lt $file_counter ]; do
+				sleep 1
+			done
+
+			touch $directoryname/.steps/loop.done
+			rm $loopname/../*.done
+
+			uuid=loop
 		fi
 		let "step++"
 	fi
