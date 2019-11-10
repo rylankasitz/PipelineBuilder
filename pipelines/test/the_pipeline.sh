@@ -29,7 +29,7 @@ while [ "$step" -lt "4" ]; do
 		fi
 		if [ "$step" == 1 ]
 		then
-			sbatch /homes/rylankasitz/PipelineBuilder/programs/run_add_count.sh --count 50 --input $directoryname/add_count.txt  --done $directoryname/.steps/program2.done
+			sbatch /homes/rylankasitz/PipelineBuilder/programs/run_add_count.sh --count 50 --input $directoryname/add_count.txt --final_output $directoryname/final_output --done $directoryname/.steps/program2.done
 			uuid=program2
 		fi
 		let "step++"
