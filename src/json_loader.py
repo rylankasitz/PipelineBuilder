@@ -16,7 +16,9 @@ def load_config(file_name):
     return load_block(loaded)
 
 def load_block(config_dict):
-    if _TYPE_KEY in config_dict:
+    if config_dict is None:
+        return None
+    elif _TYPE_KEY in config_dict:
         block_type = config_dict[_TYPE_KEY]
         block_class = _REGISTERED_CLASSES[block_type]
         attribs = [a for a in dir(block_class) if not (a.startswith('__') and a.endswith('__'))]

@@ -16,5 +16,5 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-cat input >> output
-echo $count >> output
+cat $input >> $output
+echo $count >> $output

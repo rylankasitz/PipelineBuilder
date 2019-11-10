@@ -22,12 +22,12 @@ while [ "$step" -lt "4" ]; do
 	if [ -f "$file" ]
 	then
 		rm $directoryname/.steps/$uuid.done
-		if [ "$step" == 0]
+		if [ "$step" == 0 ]
 		then
 			sbatch /homes/rylankasitz/PipelineBuilder/programs/run_add_count.sh --input $__loop__ --count 100 --output $directoryname/add_count.txt --done $directoryname/.steps/program1.done
 			uuid=program1
 		fi
-		if [ "$step" == 1]
+		if [ "$step" == 1 ]
 		then
 			sbatch /homes/rylankasitz/PipelineBuilder/programs/run_add_count.sh --count 50 --input $directoryname/add_count.txt  --done $directoryname/.steps/program2.done
 			uuid=program2
