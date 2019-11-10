@@ -47,8 +47,7 @@ def convert_to_dict(obj):
     if hasattr(obj, "__dict__"):
         for k, v in _REGISTERED_CLASSES.items():
             if isinstance(obj, v):
-                v.type = k
-
+                obj.type = k
         return convert_to_dict(obj.__dict__)
     elif isinstance(obj, dict):
         for k, v in obj.items():
