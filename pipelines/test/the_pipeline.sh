@@ -22,12 +22,12 @@ while [ "$step" -lt "4" ]; do
 	file=$directoryname/$uuid.done
 		if [ -f "$file" ]
 		then
-			sbatch progs/run_add_count.sh --input $__loop__ --count 100 --output $directoryname/../add_count.txt
+			sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\programs/run_add_count.sh --input $__loop__ --count 100 --output $directoryname/add_count.txt
 			uuid=program1
 		fi
 		if [ -f "$file" ]
 		then
-			sbatch progs/run_add_count.sh --count 50 --input $directoryname/../add_count.txt 
+			sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\programs/run_add_count.sh --count 50 --input $directoryname/add_count.txt 
 			uuid=program2
 		fi
 	sleep 5

@@ -3,6 +3,7 @@ import sys
 import configs.pipeline_config
 import configs.program_config
 import json_loader
+import os
 
 def add_excecution_order(blocks, outputs, run_num):
     for output in outputs:
@@ -53,7 +54,6 @@ def compile_pipeline(env, pipe):
 
     for block in flatten_blocks(pipe.blocks):
         compiled = compile_(env, block)
-        print(compiled)
         shell += '\n\t\tif [ -f "$file" ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + block.uuid + "\n\t\tfi"
 
     shell += "\n\tsleep 5\ndone"
@@ -76,7 +76,7 @@ def compile_program(env, block):
     def gen_outputs():
         for out in block.outputs:
             output_type = program_block.output_types[out.output_name]
-            output_file = "$directoryname/../" + block.name + output_type
+            output_file = "$directoryname/" + block.name + output_type
             arg = "--{} {}".format(
                 out.output_name,
                 output_file
@@ -135,11 +135,12 @@ def setup_constants(env, constants):
 
 #utils.pretty_print(utils.convert_to_dict(pipeline))
 
+pipeline_name = "test"
 
 env = Env()
 env.directory = "dir"
-env.program_location = "progs"
-env.pipeline_location = "pipelines/test"
+env.program_location = os.path.abspath("./programs")
+env.pipeline_location = os.path.abspath("./pipelines/" + pipeline_name)
 
 prog = json_loader.load_config("pipelines/test/config.json")
 
