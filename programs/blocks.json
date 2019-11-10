@@ -1,4 +1,23 @@
 {
+    "pipeline_root" : {
+        "type": "program_block",
+        "name" : "pipeline_root",
+        "location": "",
+        "command" : "",
+        "inputs" : [
+        ],
+        "outputs" : [
+            "arg1",
+            "arg3",
+            "arg4",
+            "arg5"
+        ],
+        "sbatch" : [
+            
+        ],
+        "output_types" : {
+        }
+    },
     "add_count" : {
         "type": "program_block",
         "name" : "add_count",
