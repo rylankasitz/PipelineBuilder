@@ -58,7 +58,7 @@ def compile_pipeline(env, pipe):
     i = 0
     for block in flatten_blocks(pipe.blocks):
         compiled = compile_(env, block)
-        shell += '\n\t\tif [ "$step" == ' + str(i) + ']\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + block.uuid + "\n\t\tfi"
+        shell += '\n\t\tif [ "$step" == ' + str(i) + ' ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + block.uuid + "\n\t\tfi"
         i+=1
 
     shell += '\n\t\tlet "step++"\n\tfi\n\tsleep 5\ndone'
