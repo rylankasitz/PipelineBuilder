@@ -40,10 +40,10 @@ def compile_pipeline(env, pipe):
     shell = utils.get_shell_args(['directoryname'] + [output.output_name for output in pipe.outputs])
     shell += 'step=0\nuuid="init"\ntouch $directoryname/../$uuid.done\n\n'
     shell += 'while [ "$step" -lt "' + str(steps) + '" ]; do\n\tfile=$directoryname/../$uuid.done'
-    for uuid, block in pipe.blocks.items():
+    for block in flatten_blocks(pipe.blocks):
         compiled = compile_(env, block)
         print(compiled)
-        shell += '\n\t\tif [ -f "$file" ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + uuid + "\n\t\tfi"
+        shell += '\n\t\tif [ -f "$file" ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + block.uuid + "\n\t\tfi"
     shell += "\n\tsleep 5\ndone"
     shell += "\ntouch $directoryname/../<pipeline_uuid>.done"
     return shell
@@ -82,9 +82,18 @@ def compile_loop(env, loop):
 def compile_constant(env, constant):
     return ""
 
+def flatten_blocks(blocks):
+    new_blocks = list()
+    for key, block in blocks.items():
+        if block.type != "constant":
+            new_blocks.append(block)
+    new_blocks.sort(key=lambda val: val.run_order)
+    return new_blocks
+
+
 #pipeline = utils.get_pipeline("test")
 
-#add_excecution_order(pipeline.blocks, pipeline.outputs, 0)
+
 
 #utils.pretty_print(utils.convert_to_dict(pipeline))
 
@@ -94,6 +103,8 @@ env.directory = "dir"
 env.program_location = "progs"
 
 prog = json_loader.load_config("pipelines/test/test.json")
+
+add_excecution_order(prog.blocks, prog.outputs, 0)
 
 print(compile_(env, prog))
 
