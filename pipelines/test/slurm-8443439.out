@@ -1,0 +1,11 @@
+Submitted batch job 8443441
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+ls: cannot access /bulk/rylankasitz/pipeline_builder_example/files//../the_pipeline/*.done: No such file or directory
+slurmstepd: error: *** JOB 8443439 ON dwarf48 CANCELLED AT 2019-11-09T19:21:40 ***
