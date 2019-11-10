@@ -2,7 +2,7 @@
     "add_count" : {
         "type": "program_block",
         "name" : "add_count",
-        "location": "/../test_programs/",
+        "location": "",
         "command" : "sbatch /homes/rylankasitz/PipelineBuilder/test_programs/repeat.sh --input $input --count $count --output $output",
         "inputs" : [
             "input",

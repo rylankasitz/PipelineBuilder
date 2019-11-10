@@ -29,8 +29,7 @@ while [ "$step" -lt "1" ]; do
 
 			for entry in $loopname/*.txt
 			do
-
-				sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\pipelines\test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline_$file_counter/
+				sbatch /homes/rylankasitz/PipelineBuilder/pipelines/test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline_$file_counter/
 				let file_counter++
 			done
 
