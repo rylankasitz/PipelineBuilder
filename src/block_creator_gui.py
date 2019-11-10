@@ -6,6 +6,7 @@ from tkinter import messagebox
 from configs.program_config import ProgramBlock
 import json_loader
 import utils
+import program_compiler
 
 UI_FILE = "block_editor.ui"
 
@@ -87,23 +88,10 @@ class Application(pygubu.TkApplication):
 
         new_block.sbatch = prelim_sbatch_text.splitlines()
 
-        print("new_block.name:")
-        print(new_block.name)
-        print("new_block.command:")
-        print(new_block.command)
-        print("new_block.inputs:")
-        print(new_block.inputs)
-        print("new_block.outputs:")
-        print(new_block.outputs)
-        print("new_block.output_types:")
-        print(new_block.output_types)
-        print("new_block.sbatch:")
-        print(new_block.sbatch)
-
         blocks = utils.get_blocks()
         blocks[new_block.name] = new_block
         json_loader.write_config("./../programs/blocks.json",blocks)
-
+        program_compiler.run(new_block.name)
 
 
     def quit(self, event=None):
