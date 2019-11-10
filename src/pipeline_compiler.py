@@ -145,7 +145,7 @@ def setup_constants(env, constants):
 
 #utils.pretty_print(utils.convert_to_dict(pipeline))
 
-pipeline_name = "test"
+pipeline_name = sys.argv[1]
 
 env = Env()
 env.directory = "dir"
