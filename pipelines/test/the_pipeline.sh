@@ -36,4 +36,4 @@ while [ "$step" -lt "2" ]; do
 	fi
 	sleep 1
 done
-touch $directoryname/pipeline1.done
+touch $directoryname/../$(uuidgen).done

@@ -29,17 +29,17 @@ while [ "$step" -lt "1" ]; do
 
 			for entry in $loopname/*.txt
 			do
-				mkdir -p $loopname/../the_pipeline/$file_counter
-				sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\pipelines\test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline/
+
+				sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\pipelines\test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline_$file_counter/
 				let file_counter++
 			done
 
-			while [ $(ls -lR $loopname/../the_pipeline/*.done | wc -l) -lt $file_counter ]; do
+			while [ $(ls -lR $loopname/../*.done | wc -l) -lt $file_counter ]; do
 				sleep 1
 			done
 
 			touch $directoryname/.steps/forloop1.done
-			rm $loopname/../the_pipeline/*.done
+			rm $loopname/../*.done
 
 			uuid=forloop1
 		fi
@@ -47,4 +47,4 @@ while [ "$step" -lt "1" ]; do
 	fi
 	sleep 1
 done
-touch $directoryname/big_boi.done
+touch $directoryname/../$(uuidgen).done
