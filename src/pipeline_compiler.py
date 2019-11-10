@@ -7,14 +7,15 @@ import os
 
 def add_excecution_order(blocks, outputs, run_num):
     for output in outputs:
-        if not hasattr(blocks[output.input_uuid], "run_order"):
-            blocks[output.input_uuid].run_order = 0
+        if output.input_uuid != None:
+            if not hasattr(blocks[output.input_uuid], "run_order"):
+                blocks[output.input_uuid].run_order = 0
 
-        if blocks[output.input_uuid].type == "loop":
-            add_excecution_order(blocks[output.input_uuid].body.blocks, blocks[output.input_uuid].body.outputs, 0)
+            if blocks[output.input_uuid].type == "loop":
+                add_excecution_order(blocks[output.input_uuid].body.blocks, blocks[output.input_uuid].body.outputs, 0)
 
-        blocks[output.input_uuid].run_order = max(blocks[output.input_uuid].run_order, run_num + 1)
-        add_excecution_order(blocks, blocks[output.input_uuid].outputs, run_num + 1)
+            blocks[output.input_uuid].run_order = max(blocks[output.input_uuid].run_order, run_num + 1)
+            add_excecution_order(blocks, blocks[output.input_uuid].outputs, run_num + 1)
 
 class Env:
     def __init__(self):
@@ -80,8 +81,11 @@ def compile_program(env, block):
 
     def gen_outputs():
         for out in block.outputs:
-            output_type = program_block.output_types[out.output_name]
-            output_file = "$directoryname/" + block.name + output_type
+            if out.output_name not in program_block.output_types:
+                output_file = "$directoryname/" + out.output_name
+            else:
+                output_type = program_block.output_types[out.output_name]
+                output_file = "$directoryname/" + block.name + output_type
             arg = "--{} {}".format(
                 out.output_name,
                 output_file

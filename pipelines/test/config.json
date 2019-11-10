@@ -46,7 +46,14 @@
                         "uuid": "program2",
                         "type": "program",
                         "name": "add_count",
-                        "outputs": []
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": null,
+                                "output_name": "final_output",
+                                "input_name": null
+                            }
+                        ]
                     },
                     "constant1": {
                         "type": "constant",

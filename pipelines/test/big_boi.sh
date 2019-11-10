@@ -22,7 +22,7 @@ while [ "$step" -lt "1" ]; do
 	if [ -f "$file" ]
 	then
 		rm $directoryname/.steps/$uuid.done
-		if [ "$step" == 0]
+		if [ "$step" == 0 ]
 		then
 			loopname=$input
 			file_counter=0
