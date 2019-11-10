@@ -13,4 +13,4 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-echo Hello $to_who > $output
+echo Hello $(cat $to_who) > $output
