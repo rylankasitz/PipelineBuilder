@@ -67,7 +67,6 @@ def compile_pipeline(env, pipe):
 
     utils.create_shell_file(file_, []) # add shell args later
     utils.append_to_file(file_, shell)
-    utils.append_to_file(file_, "mkdir -p $directoryname/step_files")
 
     return ""
 
