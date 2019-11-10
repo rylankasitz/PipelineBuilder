@@ -48,7 +48,7 @@ def compile_pipeline(env, pipe):
     setup_constants(env, (b for _, b in pipe.blocks.items() if b.type == "constant"))
 
     file_ = env.pipeline_location + "/" + pipe.name + ".sh"
-    steps = len(pipe.blocks)
+    steps = len(flatten_blocks(pipe.blocks))
 
     shell += '\n\nstep=0\nuuid="init"\nmkdir -p $directoryname/.steps\ntouch $directoryname/.steps/$uuid.done\n\n'
 
@@ -67,7 +67,6 @@ def compile_pipeline(env, pipe):
 
     utils.create_shell_file(file_, []) # add shell args later
     utils.append_to_file(file_, shell)
-    utils.append_to_file(file_, "mkdir -p $directoryname/step_files")
 
     return ""
 
