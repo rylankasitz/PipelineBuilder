@@ -47,4 +47,4 @@ while [ "$step" -lt "1" ]; do
 	fi
 	sleep 5
 done
-touch $directoryname/big_boi.donemkdir -p $directoryname/step_files
+touch $directoryname/big_boi.done

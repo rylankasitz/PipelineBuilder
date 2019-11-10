@@ -17,7 +17,7 @@ uuid="init"
 mkdir -p $directoryname/.steps
 touch $directoryname/.steps/$uuid.done
 
-while [ "$step" -lt "4" ]; do
+while [ "$step" -lt "2" ]; do
 	file=$directoryname/.steps/$uuid.done
 	if [ -f "$file" ]
 	then
@@ -36,4 +36,4 @@ while [ "$step" -lt "4" ]; do
 	fi
 	sleep 5
 done
-touch $directoryname/pipeline1.donemkdir -p $directoryname/step_files
+touch $directoryname/pipeline1.done
