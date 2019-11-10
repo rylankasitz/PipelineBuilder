@@ -30,7 +30,7 @@ while [ "$step" -lt "1" ]; do
 			for entry in $loopname/*.txt
 			do
 				mkdir -p $loopname/../the_pipeline/$file_counter
-				sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\pipelines\test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline/
+				sbatch /homes/rylankasitz/PipelineBuilder/pipelines/test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline/
 				let file_counter++
 			done
 
