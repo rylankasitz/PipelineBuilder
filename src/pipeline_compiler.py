@@ -60,7 +60,6 @@ def compile_pipeline(env, pipe):
     shell += "\ntouch $directoryname/" + pipe.uuid + ".done"
 
     utils.create_shell_file(file_, []) # add shell args later
-    utils.export_path_in_shell(file_, '$(realpath "/pipelines/' + pipe.name + '")')
     utils.append_to_file(file_, shell)
 
     return ""
@@ -99,7 +98,7 @@ def compile_loop(env, loop):
     last_prog = progs[len(progs) - 1]
     output_shell = "$loopname/../" + loop.body.name + "/"
     shell = next(gen_inputs())
-    shell += "\n\t\t\tfile_counter=0\n\n\t\t\tfor entry in $loopname/" + loop.mapping + "\n\t\t\tdo\n"
+    shell += "\n\t\t\tfile_counter=1\n\n\t\t\tfor entry in $loopname/" + loop.mapping + "\n\t\t\tdo\n"
     shell += "\t\t\t\tmkdir -p " + output_shell + "$file_counter"
     shell += "\n\t\t\t\tsbatch " + env.pipeline_location + "/" + loop.body.name + ".sh --__loop__ $entry " 
     shell += "--directoryname " + output_shell
