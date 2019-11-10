@@ -37,6 +37,8 @@ def compile_(env, block):
     }[block.type](env, block)
 
 def compile_pipeline(env, pipe):
+    shell = utils.get_shell_args(['directoryname'] + [output.output_name for output in pipe.outputs])
+
     for out in pipe.outputs:
         out.output_name = "$"+out.output_name
         env.add_input(out.input_uuid, out)
@@ -46,9 +48,8 @@ def compile_pipeline(env, pipe):
     file_ = env.pipeline_location + "/" + pipe.name + ".sh"
     steps = len(pipe.blocks)
 
-    shell = utils.get_shell_args(['directoryname'] + [output.output_name for output in pipe.outputs])
-    shell += '\n\nstep=0\nuuid="init"\ntouch $directoryname/../$uuid.done\n\n'
-    shell += 'while [ "$step" -lt "' + str(steps) + '" ]; do\n\tfile=$directoryname/../$uuid.done'
+    shell += '\n\nstep=0\nuuid="init"\ntouch $directoryname/$uuid.done\n\n'
+    shell += 'while [ "$step" -lt "' + str(steps) + '" ]; do\n\tfile=$directoryname/$uuid.done'
 
     for block in flatten_blocks(pipe.blocks):
         compiled = compile_(env, block)
@@ -56,9 +57,10 @@ def compile_pipeline(env, pipe):
         shell += '\n\t\tif [ -f "$file" ]\n\t\tthen\n\t\t\t' + compiled + "\n\t\t\tuuid=" + block.uuid + "\n\t\tfi"
 
     shell += "\n\tsleep 5\ndone"
-    shell += "\ntouch $directoryname/../<pipeline_uuid>.done"
+    shell += "\ntouch $directoryname/" + pipe.uuid + ".done"
 
     utils.create_shell_file(file_, []) # add shell args later
+    utils.export_path_in_shell(file_, '$(realpath "/pipelines/' + pipe.name + '")')
     utils.append_to_file(file_, shell)
 
     return ""
@@ -90,7 +92,7 @@ def compile_program(env, block):
 def compile_loop(env, loop):
     def gen_inputs():
         for input_ in env.inputs[loop.uuid]:
-            arg = "$loopname={}".format(input_.output_name)
+            arg = "loopname={}".format(input_.output_name)
             yield arg
 
     progs = flatten_blocks(loop.body.blocks)
@@ -98,8 +100,9 @@ def compile_loop(env, loop):
     output_shell = "$loopname/../" + loop.body.name + "/"
     shell = next(gen_inputs())
     shell += "\n\t\t\tfile_counter=0\n\n\t\t\tfor entry in $loopname/" + loop.mapping + "\n\t\t\tdo\n"
-    shell += "\t\t\t\tmkdir -p " + output_shell
-    shell += "\n\t\t\t\tsbatch " + env.pipeline_location + "/" + loop.body.name + ".sh --__loop__ $entry"
+    shell += "\t\t\t\tmkdir -p " + output_shell + "$file_counter"
+    shell += "\n\t\t\t\tsbatch " + env.pipeline_location + "/" + loop.body.name + ".sh --__loop__ $entry " 
+    shell += "--directoryname " + output_shell
     shell += "\n\t\t\t\tlet file_counter++\n\t\t\tdone\n"
     shell += '\n\t\t\twhile [ $(ls -lR ' + output_shell + '*.done | wc -l) -lt $file_counter ]; do\n\t\t\t\tsleep 30\n\t\t\tdone\n'
     shell += "\n\t\t\ttouch $loopname/../" + loop.uuid + ".done\n"
