@@ -30,12 +30,12 @@ while [ "$step" -lt "1" ]; do
 			for entry in $loopname/*.txt
 			do
 				mkdir -p $loopname/../the_pipeline/$file_counter
-				sbatch /homes/rylankasitz/PipelineBuilder/pipelines/test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline/
+				sbatch C:\Users\Rylan\Documents\HackKstate\PipelineBuilder\pipelines\test/the_pipeline.sh --__loop__ $entry --directoryname $loopname/../the_pipeline/
 				let file_counter++
 			done
 
 			while [ $(ls -lR $loopname/../the_pipeline/*.done | wc -l) -lt $file_counter ]; do
-				sleep 30
+				sleep 1
 			done
 
 			touch $directoryname/.steps/forloop1.done
@@ -45,6 +45,6 @@ while [ "$step" -lt "1" ]; do
 		fi
 		let "step++"
 	fi
-	sleep 5
+	sleep 1
 done
 touch $directoryname/big_boi.done
