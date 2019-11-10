@@ -88,12 +88,12 @@
             <property name="height">6</property>
             <property name="relief">flat</property>
             <property name="state">normal</property>
-            <property name="text" translatable="yes">#!/bin/bash -l
-#SBATCH --job-name=custom_job
-#SBATCH --nodes=1
-#SBATCH --time=0-08:00:00
-#SBATCH --output="%x_%j.o"
-#SBATCH --error="%x_%j.e"</property>
+            <property name="text" translatable="yes">
+--job-name=custom_job
+--nodes=1
+--time=0-00:01:00
+--output="%x_%j.o"
+--error="%x_%j.e"</property>
             <property name="width">80</property>
             <layout>
               <property name="column">0</property>
