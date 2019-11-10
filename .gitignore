@@ -1,5 +1,7 @@
 # User ignore
 virtualenvs/
+pipelines/*.sh
+programs/*.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
