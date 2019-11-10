@@ -10,6 +10,41 @@
       <property name="row">0</property>
     </layout>
     <child>
+      <object class="ttk.Labelframe" id="name_lf">
+        <property name="height">200</property>
+        <property name="padding">0</property>
+        <property name="text" translatable="yes">Block Name</property>
+        <property name="width">200</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="ttk.Entry" id="name_ent">
+            <property name="width">80</property>
+            <layout>
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Separator" id="Separator_3">
+        <property name="orient">horizontal</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="pady">20</property>
+          <property name="propagate">True</property>
+          <property name="row">1</property>
+          <property name="sticky">ew</property>
+        </layout>
+      </object>
+    </child>
+    <child>
       <object class="ttk.Labelframe" id="command_lf">
         <property name="height">200</property>
         <property name="padding">0</property>
@@ -18,7 +53,7 @@
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
-          <property name="row">0</property>
+          <property name="row">2</property>
         </layout>
         <child>
           <object class="ttk.Entry" id="command_ent">
@@ -45,7 +80,7 @@
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
-          <property name="row">1</property>
+          <property name="row">3</property>
         </layout>
         <child>
           <object class="tk.Text" id="sbatch_txtbox">
@@ -76,7 +111,7 @@
           <property name="column">0</property>
           <property name="pady">20</property>
           <property name="propagate">True</property>
-          <property name="row">2</property>
+          <property name="row">4</property>
           <property name="sticky">ew</property>
         </layout>
       </object>
@@ -89,7 +124,7 @@
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
-          <property name="row">3</property>
+          <property name="row">5</property>
         </layout>
         <child>
           <object class="ttk.Entry" id="input_ent_1">
@@ -124,7 +159,7 @@
           <property name="column">0</property>
           <property name="pady">20</property>
           <property name="propagate">True</property>
-          <property name="row">11</property>
+          <property name="row">6</property>
           <property name="sticky">ew</property>
         </layout>
       </object>
@@ -137,7 +172,7 @@
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
-          <property name="row">12</property>
+          <property name="row">7</property>
         </layout>
         <child>
           <object class="ttk.Entry" id="output_ent_1">
@@ -166,25 +201,28 @@
       </object>
     </child>
     <child>
-      <object class="ttk.Separator" id="Separator_1">
+      <object class="ttk.Separator" id="Separator_4">
         <property name="orient">horizontal</property>
         <layout>
           <property name="column">0</property>
           <property name="pady">20</property>
           <property name="propagate">True</property>
-          <property name="row">13</property>
-          <property name="sticky">e</property>
+          <property name="row">8</property>
+          <property name="sticky">ew</property>
         </layout>
       </object>
     </child>
     <child>
       <object class="ttk.Button" id="generate_btn">
+        <property name="command">construct_blocks_json</property>
         <property name="cursor">arrow</property>
+        <property name="default">normal</property>
         <property name="text" translatable="yes">Generate Block</property>
+        <bind add="" handler="construct_blocks_json" sequence="&lt;Button-1&gt;" />
         <layout>
           <property name="column">0</property>
           <property name="propagate">True</property>
-          <property name="row">14</property>
+          <property name="row">9</property>
           <property name="sticky">e</property>
         </layout>
       </object>
