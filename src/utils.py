@@ -46,20 +46,6 @@ def get_blocks():
 def get_block(name):
     return get_blocks()[name]
 
-def convert_to_dict(obj):
-    if hasattr(obj, "__dict__"):
-        return convert_to_dict(obj.__dict__)
-    elif isinstance(obj, dict):
-        for k, v in obj.items():
-            obj[k] = convert_to_dict(v)
-        return obj
-    elif isinstance(obj, list):
-        for i, v in enumerate(obj):
-            obj[i] = convert_to_dict(v)
-        return obj
-    else:
-        return obj
-
 def pretty_print(dict_):
     pp = pprint.PrettyPrinter(indent=1)
     pp.pprint(dict_)
