@@ -1,3 +1,8 @@
+module load Python/3.6.6-foss-2018b
+module load Tkinter/3.6.6-foss-2018b-Python-3.6.6
+source ~/virtualenvs/tkinter/bin/activate
+export PYTHONDONTWRITEBYTECODE=1
+
 pipline_name=$1
 
 mkdir -p ./pipelines/$pipline_name
