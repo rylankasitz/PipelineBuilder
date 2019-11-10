@@ -1,5 +1,7 @@
 {
     "type": "pipeline",
+    "uuid": "big_boi",
+    "name": "big_boi",
     "outputs": [
         {
             "type": "output",
@@ -16,12 +18,14 @@
             "outputs": [],
             "body": {
                 "type": "pipeline",
+                "uuid": "pipeline1",
+                "name": "the_pipeline",
                 "outputs": [
                     {
                         "type": "output",
                         "input_uuid": "program1",
-                        "output_name": "input",
-                        "input_name": "__loop__"
+                        "output_name": "__loop__",
+                        "input_name": "input"
                     }
                 ],
                 "blocks": {

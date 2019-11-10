@@ -18,7 +18,7 @@ while [ "$1" != "" ]; do
 done
 
 step=0
-new_uuid="init"
+uuid="init"
 touch $directoryname/../$uuid.done
 program_location=<location of programs>
 
@@ -42,3 +42,21 @@ while [ "$step" -lt <len(blocks) + 1> ]; do
 done
 
 touch $directoryname/../<pipeline_uuid>.done
+
+
+###### Loop Temp ######
+file_counter=0
+for entry in $directoryname/<mapping>
+do   
+    mkdir -p $directoryname/../<pipeline name>/
+    sbatch $program_location/<program name> [mapped inputs] --<output_name> $directoryname/../<pipeline name>/$file_counter<ext>
+    let "file_counter++"
+done
+
+while [ $(ls -lR $directoryname/../<pipeline name>/*.done | wc -l) -lt $file_counter ]; do
+    sleep 60
+done
+
+touch $directoryname/../<uuid>.done
+
+rm $directoryname/../<pipeline name>/*.done

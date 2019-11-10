@@ -5,6 +5,9 @@ export PATH="/../test_programs/:$PATH"
 
 while [ "$1" != "" ]; do
 	case $1 in
+		--done) shift
+					done=$1
+					;;
 		--input) shift
 					input=$1
 					;;
@@ -19,3 +22,5 @@ while [ "$1" != "" ]; do
 done
 
 sbatch $repeat --input $input --count $count --output $output
+
+touch $done
