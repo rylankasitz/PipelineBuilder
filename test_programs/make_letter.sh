@@ -3,11 +3,8 @@
 
 while [ "$1" != "" ]; do
 	case $1 in
-		--input) shift
-					input=$1
-					;;
-		--count) shift
-					count=$1
+		--greeting_file) shift
+					greeting_file=$1
 					;;
 		--output) shift
 					output=$1
@@ -16,5 +13,5 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-cat input >> output
-echo $count >> output
+cat $greeting_file > $output
+echo How are you doing today? >> $output

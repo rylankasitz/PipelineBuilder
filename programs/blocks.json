@@ -17,5 +17,39 @@
         "output_types" : {
             "output" : ".txt"
         }
+    },
+    "say_hello": {
+        "type": "program_block",
+        "name" : "say_hello",
+        "command" : "sbatch ../test_programs/say_hello.sh --to_who $to_who --output $output",
+        "inputs" : [
+            "to_who"
+        ],
+        "outputs" : [
+            "output"
+        ],
+        "sbatch" : [
+            "--time=1:00"
+        ],
+        "output_types" : {
+            "output" : ".txt"
+        }
+    },
+    "make_letter": {
+        "type": "program_block",
+        "name" : "make_letter",
+        "command" : "sbatch ../test_programs/make_letter.sh --greeting_file $greeting --output $output",
+        "inputs" : [
+            "greeting"
+        ],
+        "outputs" : [
+            "output"
+        ],
+        "sbatch" : [
+            "--time=1:00"
+        ],
+        "output_types" : {
+            "output" : ".txt"
+        }
     }
 }

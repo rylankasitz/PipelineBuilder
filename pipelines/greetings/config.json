@@ -1,0 +1,79 @@
+{
+    "type": "pipeline",
+    "uuid": "greet",
+    "name": "greet",
+    "outputs": [
+        {
+            "type": "output",
+            "input_uuid": "forloop1",
+            "output_name": "greetings_list",
+            "input_name": "list"
+        }
+    ],
+    "blocks": {
+        "greet_loop": {
+            "uuid": "greet_loop",
+            "type": "loop",
+            "mapping": "*.txt",
+            "outputs": [],
+            "body": {
+                "type": "pipeline",
+                "uuid": "create_greeting_pipe",
+                "name": "create_greeting_pipe",
+                "outputs": [
+                    {
+                        "type": "output",
+                        "input_uuid": "program1",
+                        "output_name": "__loop__",
+                        "input_name": "input"
+                    }
+                ],
+                "blocks": {
+                    "program1": {
+                        "uuid": "program1",
+                        "type": "program",
+                        "name": "add_count",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": "program2",
+                                "output_name": "output",
+                                "input_name": "input"
+                            }
+                        ]
+                    },
+                    "program2": {
+                        "uuid": "program2",
+                        "type": "program",
+                        "name": "add_count",
+                        "outputs": []
+                    },
+                    "constant1": {
+                        "type": "constant",
+                        "value": "100",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": "program1",
+                                "output_name": "100",
+                                "input_name": "count"
+                            }
+                        ]
+                    },
+                    "constant2": {
+                        "type": "constant",
+                        "value": "50",
+                        "outputs": [
+                            {
+                                "type": "output",
+                                "input_uuid": "program2",
+                                "output_name": "50",
+                                "input_name": "count"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

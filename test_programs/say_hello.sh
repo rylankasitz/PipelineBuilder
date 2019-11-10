@@ -3,11 +3,8 @@
 
 while [ "$1" != "" ]; do
 	case $1 in
-		--input) shift
-					input=$1
-					;;
-		--count) shift
-					count=$1
+		--to_who) shift
+					to_who=$1
 					;;
 		--output) shift
 					output=$1
@@ -16,5 +13,4 @@ while [ "$1" != "" ]; do
 	shift
 done
 
-cat input >> output
-echo $count >> output
+echo Hello $to_who > $output
