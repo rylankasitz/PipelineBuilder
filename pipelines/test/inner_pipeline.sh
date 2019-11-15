@@ -6,9 +6,9 @@ while [ $1 != "" ]; do
 			shift
 			workspace=$1
 		;;
-		--__entry__)
+		--__Entry__)
 			shift
-			__entry__=$1
+			__Entry__=$1
 		;;
 	esac
 	shift
@@ -24,10 +24,10 @@ while [ $steps -lt "3" ]; do
 	if [ -f $file ]; then
 		rm $workspace/.steps/$uuid.done
 		if [ $step = "0" ]; then
-			SBATCH D:\Rylan\Documents\Work\PipelineBuilder\programs/run_say_hello.sh --done $workspace/.steps/$uuid.done --to_who __entry__ --output $workspace/say_hello.txt
+			SBATCH D:\Rylan\Documents\Work\PipelineBuilder\programs/run_say_hello.sh --done $workspace/.steps/$uuid.done --to_who __Entry__ --output $workspace/say_hello.txt
 		fi
 		if [ $step = "0" ]; then
-			SBATCH D:\Rylan\Documents\Work\PipelineBuilder\programs/run_make_letter.sh --done $workspace/.steps/$uuid.done --greeting say_hello.txt --output $workspace/make_letter.txt
+			SBATCH D:\Rylan\Documents\Work\PipelineBuilder\programs/run_make_letter.sh --done $workspace/.steps/$uuid.done --greeting say_hello.txt 
 		fi
 		let "step++"
 	fi

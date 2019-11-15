@@ -1,50 +1,46 @@
 #!/bin/bash
 
-while [ "$1" != "" ]; do
+while [ $1 != "" ]; do
 	case $1 in
-		--directoryname) shift
-					directoryname=$1
-					;;
-		--input) shift
-					input=$1
-					;;
+		--workspace)
+			shift
+			workspace=$1
+		;;
+		--input)
+			shift
+			input=$1
+		;;
 	esac
 	shift
 done
 
 step=0
 uuid="init"
-mkdir -p $directoryname/.steps
-touch $directoryname/.steps/$uuid.done
+mkdir -p $workspace/.steps
+touch $workspace/.steps/$uuid.done
 
-while [ "$step" -lt "1" ]; do
-	file=$directoryname/.steps/$uuid.done
-	if [ -f "$file" ]
-	then
-		rm $directoryname/.steps/$uuid.done
-		if [ "$step" == 0 ]
-		then
-			loopname=$input
-			file_counter=0
+while [ $steps -lt "2" ]; do
+	file=$workspace/.steps/$uuid.done
+	if [ -f $file ]; then
+		rm $workspace/.steps/$uuid.done
+		if [ $step = "0" ]; then
+			counter=0
 
-			for entry in $loopname/*_greet.txt
+			for __entry__ in input/*_greet.txt
 			do
-
-				sbatch /homes/rylankasitz/PipelineBuilder/pipelines/greetings/edit_greetings.sh --__loop__ $entry --directoryname $loopname/../edit_greetings_$file_counter/
-				let file_counter++
+				SBATCH D:\Rylan\Documents\Work\PipelineBuilder\pipelines\greetings/edit_greetings.sh --__entry__ __entry__ --workspace workspace/edit_greetings_$count 
+				let "counter++"
 			done
 
-			while [ $(ls -lR $loopname/../*.done | wc -l) -lt $file_counter ]; do
-				sleep 1
+			while [ $(ls -lR $input/../*.done | wc -l) -lt $counter ]; do
+				sleep 30
 			done
 
-			touch $directoryname/.steps/loop.done
-			rm $loopname/../*.done
-
-			uuid=loop
+			touch workspace/.steps/uuid.done
+			rm --rf workspace/.steps/uuid.done
+			uuid="loop"
 		fi
 		let "step++"
 	fi
-	sleep 1
+	sleep 30
 done
-touch $directoryname/../$(uuidgen).done

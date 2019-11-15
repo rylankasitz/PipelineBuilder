@@ -10,6 +10,7 @@ class Outputs():
 class Pipeline():
     uuid = ""
     name = ""
+    root = False
     blocks = {}
     outputs = []
 

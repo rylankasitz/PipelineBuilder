@@ -1,16 +1,16 @@
 import sys
 import os
 
-import utils
 import json_loader
+import shell_writer
+import utils
 
 def run(name):
-    program_name = name
-    program = utils.get_block(program_name)
-    print(program)
+    program = utils.get_block(name)
 
-    file_name = os.path.abspath("../programs/" + "run_" + program_name + ".sh")
-    utils.create_shell_file(file_name, program.sbatch)
-    utils.write_shell_args(file_name, ['done'] + program.inputs + program.outputs)
-    utils.append_to_file(file_name, "\n\n" + program.command + "\n")
-    utils.append_to_file(file_name, "\ntouch $done")
+    file_name = os.path.abspath("./programs/" + "run_" + name + ".sh")
+    contents = shell_writer.program_wrapper(program.sbatch, ['done'] + program.inputs + program.outputs, program.command)
+    shell_writer.write(file_name, contents)
+    
+run('say_hello')
+run('make_letter')

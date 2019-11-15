@@ -2,6 +2,7 @@
     "type": "pipeline",
     "uuid": "greetings",
     "name": "greetings",
+    "root": "True",
     "outputs": [
         {
             "type": "output",
@@ -15,16 +16,24 @@
             "uuid": "loop",
             "type": "loop",
             "mapping": "*_greet.txt",
-            "outputs": [],
+            "outputs": [
+                {
+                    "type": "output",
+                    "input_uuid": "edit_greetings",
+                    "output_name": "__entry__",
+                    "input_name": "__entry__"
+                }
+            ],
             "body": {
                 "type": "pipeline",
                 "uuid": "edit_greetings",
                 "name": "edit_greetings",
+                "root": "False",
                 "outputs": [
                     {
                         "type": "output",
                         "input_uuid": "create_greeting",
-                        "output_name": "__loop__",
+                        "output_name": "__entry__",
                         "input_name": "to_who"
                     }
                 ],

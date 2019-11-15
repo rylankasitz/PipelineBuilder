@@ -6,5 +6,5 @@ class ProgramBlock():
     command = ""
     inputs = list()
     outputs = list()
-    sbatch = list()
+    sbatch = {}
     output_types = {}
